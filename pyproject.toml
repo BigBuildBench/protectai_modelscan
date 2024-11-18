@@ -1,0 +1,52 @@
+[tool.poetry]
+name = "modelscan"
+version = "0.0.0"
+description = "The modelscan package is a cli tool for detecting unsafe operations in model files across various model serialization formats."
+authors = ["ProtectAI <community@protectai.com>"]
+license = "Apache License 2.0"
+readme = "README.md"
+packages = [{ include = "modelscan" }]
+exclude = ["tests/*", "Makefile"]
+
+[tool.poetry.scripts]
+modelscan = "modelscan.cli:main"
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"
+
+[tool.poetry.extras]
+tensorflow = ["tensorflow"]
+h5py = ["h5py"]
+
+[tool.poetry.group.test.dependencies]
+pytest = ">=7.4,<9.0"
+bandit = { version = "1.7.10", extras = ["toml"] }
+mypy = "^1.4.1"
+requests = "^2.31.0"
+aiohttp = "^3.8.5"
+dill = "^0.3.7"
+types-requests = ">1.26"
+torch = "^2.2"
+tf-keras = "^2.16.0"
+
+
+[tool.poetry.group.dev.dependencies]
+dunamai = "^1.18.0"
+pre-commit = "^3.3.3"
+black = ">=23.7,<25.0"
+
+[tool.poetry.group.prod.dependencies]
+dunamai = "^1.18.0"
+
+[build-system]
+requires = ["poetry-core", "poetry-dynamic-versioning"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry-dynamic-versioning]
+enable = true
+
+[tool.bandit]
+exclude_dirs = ["tests", "notebooks"]
+
+[tool.mypy]
+exclude = ["notebooks"]
